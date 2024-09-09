@@ -1,0 +1,23 @@
+{
+  "name": "linked-list-converter",
+  "version": "1.0.0",
+  "description": "Converts linked lists to other data types and vice versa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonwaller/linked-list-converter.git"
+  },
+  "keywords": [
+    "Linked",
+    "List"
+  ],
+  "author": "Mason Waller",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masonwaller/linked-list-converter/issues"
+  },
+  "homepage": "https://github.com/masonwaller/linked-list-converter#readme"
+}
