@@ -1,7 +1,7 @@
 {
-  "name": "linked-list-converter",
+  "name": "linked-list-operations",
   "version": "1.0.0",
-  "description": "Converts linked lists to other data types and vice versa",
+  "description": "Basic operations on a linked list along with conversions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,7 +1,5 @@
-function test() {
-  console.log("test");
-}
+const LinkedList = require("./linked-list.js");
 
 module.exports = {
-  test,
+  LinkedList,
 };
