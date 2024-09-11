@@ -23,12 +23,30 @@ function createFromArray(array) {
   return head;
 }
 
+function createCircularFromArray(array) {
+  if (array.length === 0) {
+    return null;
+  }
+  let head = new Node(array[0]);
+  let current = head;
+  for (let i = 1; i < array.length; i++) {
+    current.next = new Node(array[i]);
+    current = current.next;
+  }
+  current.next = head;
+  return head;
+}
+
 function convertToArray(head) {
   let current = head;
   let array = [];
-  while (current) {
+  let headHit = false;
+  while (current && (!headHit || current !== head)) {
     array.push(current.value);
     current = current.next;
+    if (current === head) {
+      headHit = true;
+    }
   }
   return array;
 }
@@ -37,74 +55,62 @@ function convertToObject(head) {
   let current = head;
   let object = {};
   let i = 0;
-  while (current) {
+  let headHit = false;
+  while (current && (!headHit || current !== head)) {
     object[i] = current.value;
     current = current.next;
     i++;
+    if (current === head) {
+      headHit = true;
+    }
   }
   return object;
 }
 
-function clone(start) {
-  let curr = start,
-    temp = null;
+function clone(head) {
+  let dummy = new Node(0);
+  let dummyHead = dummy;
+  let headHit = false;
 
-  // insert additional node after
-  // every node of original list
-  while (curr != null) {
-    temp = curr.next;
-
-    // Inserting node
-    curr.next = new Node(curr.value);
-    curr.next.next = temp;
-    curr = temp;
+  let curr = head;
+  while (curr && (!headHit || curr !== head)) {
+    dummy.next = new Node(curr.value);
+    dummy = dummy.next;
+    curr = curr.next;
+    if (curr === head) {
+      headHit = true;
+    }
   }
-  curr = start;
-
-  // adjust the random pointers of the
-  // newly added nodes
-  while (curr != null) {
-    // move to the next newly added node by
-    // skipping an original node
-    curr = curr.next != null ? curr.next.next : curr.next;
-  }
-
-  let original = start,
-    copy = start.next;
-
-  // save the start of copied linked list
-  temp = copy;
-
-  // now separate the original list and copied list
-  while (original != null && copy != null) {
-    original.next = original.next != null ? original.next.next : original.next;
-
-    copy.next = copy.next != null ? copy.next.next : copy.next;
-    original = original.next;
-    copy = copy.next;
-  }
-  return temp;
+  return dummyHead.next;
 }
 
 // search
 function search(head, value) {
   let current = head;
-  while (current) {
+  let headHit = false;
+  while (current && (!headHit || current !== head)) {
     if (current.value === value) {
       return true;
     }
     current = current.next;
+    if (current === head) {
+      headHit = true;
+    }
   }
   return false;
 }
 
 function find(head, value) {
   let current = head;
-  while (current) {
+  let headHit = false;
+  while (current && (!headHit || current !== head)) {
     if (current.value === value) {
       return current;
     }
     current = current.next;
+    if (current === head) {
+      headHit = true;
+    }
   }
   return null;
 }
@@ -112,9 +118,13 @@ function find(head, value) {
 function findLength(head) {
   let current = head;
   let length = 0;
-  while (current) {
+  let headHit = false;
+  while (current && (!headHit || current !== head)) {
     length++;
     current = current.next;
+    if (current === head) {
+      headHit = true;
+    }
   }
   return length;
 }
@@ -128,6 +138,7 @@ function findNthNode(head, n) {
 }
 
 function findMiddle(head) {
+  if (!head || detectCycle(head)) return null;
   let slow = head;
   let fast = head;
   while (fast && fast.next) {
@@ -138,6 +149,7 @@ function findMiddle(head) {
 }
 
 function findNthNodeFromEnd(head, n) {
+  if (!head || detectCycle(head)) return null;
   let slow = head;
   let fast = head;
   for (let i = 0; i < n; i++) {
@@ -152,6 +164,8 @@ function findNthNodeFromEnd(head, n) {
 
 // operations
 function add(head, value) {
+  if (!head) return new Node(value);
+  if (detectCycle(head)) return head;
   let current = head;
   while (current.next) {
     current = current.next;
@@ -161,6 +175,7 @@ function add(head, value) {
 }
 
 function replace(head, index, value) {
+  if (!head || detectCycle(head)) return head;
   let current = head;
   for (let i = 0; i < index; i++) {
     current = current.next;
@@ -351,6 +366,7 @@ function rotate(head, k) {
 const LinkedList = {
   createHead,
   createFromArray,
+  createCircularFromArray,
   convertToArray,
   convertToObject,
   clone,
