@@ -1,18 +1,29 @@
+class Node {
+  constructor(x) {
+    this.value = x;
+    this.next = null;
+  }
+}
+
 // converions
-function createLinkedListFromArray(array) {
+function createHead(value) {
+  return new Node(value);
+}
+
+function createFromArray(array) {
   if (array.length === 0) {
     return null;
   }
-  let head = { value: array[0], next: null };
+  let head = new Node(array[0]);
   let current = head;
   for (let i = 1; i < array.length; i++) {
-    current.next = { value: array[i], next: null };
+    current.next = new Node(array[i]);
     current = current.next;
   }
   return head;
 }
 
-function convertLinkedListToArray(head) {
+function convertToArray(head) {
   let current = head;
   let array = [];
   while (current) {
@@ -22,7 +33,7 @@ function convertLinkedListToArray(head) {
   return array;
 }
 
-function convertLinkedListToObject(head) {
+function convertToObject(head) {
   let current = head;
   let object = {};
   let i = 0;
@@ -34,8 +45,49 @@ function convertLinkedListToObject(head) {
   return object;
 }
 
+function clone(start) {
+  let curr = start,
+    temp = null;
+
+  // insert additional node after
+  // every node of original list
+  while (curr != null) {
+    temp = curr.next;
+
+    // Inserting node
+    curr.next = new Node(curr.value);
+    curr.next.next = temp;
+    curr = temp;
+  }
+  curr = start;
+
+  // adjust the random pointers of the
+  // newly added nodes
+  while (curr != null) {
+    // move to the next newly added node by
+    // skipping an original node
+    curr = curr.next != null ? curr.next.next : curr.next;
+  }
+
+  let original = start,
+    copy = start.next;
+
+  // save the start of copied linked list
+  temp = copy;
+
+  // now separate the original list and copied list
+  while (original != null && copy != null) {
+    original.next = original.next != null ? original.next.next : original.next;
+
+    copy.next = copy.next != null ? copy.next.next : copy.next;
+    original = original.next;
+    copy = copy.next;
+  }
+  return temp;
+}
+
 // search
-function searchInLinkedList(head, value) {
+function search(head, value) {
   let current = head;
   while (current) {
     if (current.value === value) {
@@ -46,7 +98,18 @@ function searchInLinkedList(head, value) {
   return false;
 }
 
-function findLengthOfLinkedList(head) {
+function find(head, value) {
+  let current = head;
+  while (current) {
+    if (current.value === value) {
+      return current;
+    }
+    current = current.next;
+  }
+  return null;
+}
+
+function findLength(head) {
   let current = head;
   let length = 0;
   while (current) {
@@ -56,7 +119,7 @@ function findLengthOfLinkedList(head) {
   return length;
 }
 
-function findNthNodeInLinkedList(head, n) {
+function findNthNode(head, n) {
   let current = head;
   for (let i = 0; i < n; i++) {
     current = current.next;
@@ -64,7 +127,7 @@ function findNthNodeInLinkedList(head, n) {
   return current;
 }
 
-function findMiddleOfLinkedList(head) {
+function findMiddle(head) {
   let slow = head;
   let fast = head;
   while (fast && fast.next) {
@@ -88,7 +151,75 @@ function findNthNodeFromEnd(head, n) {
 }
 
 // operations
-function reverseLinkedList(head) {
+function add(head, value) {
+  let current = head;
+  while (current.next) {
+    current = current.next;
+  }
+  current.next = new Node(value);
+  return head;
+}
+
+function replace(head, index, value) {
+  let current = head;
+  for (let i = 0; i < index; i++) {
+    current = current.next;
+  }
+  current.value = value;
+  return head;
+}
+
+function insert(head, index, value) {
+  if (index === 0) {
+    let newNode = new Node(value);
+    newNode.next = head;
+    return newNode;
+  }
+  let current = head;
+  for (let i = 0; i < index - 1; i++) {
+    current = current.next;
+  }
+  let newNode = new Node(value);
+  newNode.next = current.next;
+  current.next = newNode;
+  return head;
+}
+
+function removeIndex(head, index) {
+  if (index === 0) {
+    return head.next;
+  }
+  let current = head;
+  for (let i = 0; i < index - 1; i++) {
+    current = current.next;
+  }
+  current.next = current.next.next;
+  return head;
+}
+
+function removeAfterIndex(head, index) {
+  let current = head;
+  for (let i = 0; i < index; i++) {
+    current = current.next;
+  }
+  current.next = null;
+  return head;
+}
+
+function removeValue(head, value) {
+  let dummy = { next: head };
+  let current = dummy;
+  while (current.next) {
+    if (current.next.value === value) {
+      current.next = current.next.next;
+    } else {
+      current = current.next;
+    }
+  }
+  return dummy.next;
+}
+
+function reverse(head) {
   let current = head;
   let prev = null;
   while (current) {
@@ -100,7 +231,16 @@ function reverseLinkedList(head) {
   return prev;
 }
 
-function detectCycleInLinkedList(head) {
+function combine(head1, head2) {
+  let current = head1;
+  while (current.next) {
+    current = current.next;
+  }
+  current.next = head2;
+  return head1;
+}
+
+function detectCycle(head) {
   let slow = head;
   let fast = head;
   while (fast && fast.next) {
@@ -113,7 +253,7 @@ function detectCycleInLinkedList(head) {
   return false;
 }
 
-function findCycleInLinkedList(head) {
+function findCycle(head) {
   let slow = head;
   let fast = head;
   while (fast && fast.next) {
@@ -134,7 +274,7 @@ function findCycleInLinkedList(head) {
   return slow;
 }
 
-function removeCycleInLinkedList(head) {
+function removeCycle(head) {
   let cycleNode = findCycleInLinkedList(head);
   if (!cycleNode) {
     return head;
@@ -148,8 +288,8 @@ function removeCycleInLinkedList(head) {
   return head;
 }
 
-function mergeTwoSortedLinkedLists(head1, head2) {
-  let dummy = { next: null };
+function mergeTwoSorted(head1, head2) {
+  let dummy = new Node(0);
   let current = dummy;
   while (head1 && head2) {
     if (head1.value < head2.value) {
@@ -165,22 +305,33 @@ function mergeTwoSortedLinkedLists(head1, head2) {
   return dummy.next;
 }
 
-function mergeLinkedLists(head1, head2) {
+function merge(head1, head2) {
   if (!head1) {
     return head2;
   }
   if (!head2) {
     return head1;
   }
-  if (head1.value < head2.value) {
-    head1.next = mergeLinkedLists(head1.next, head2);
-    return head1;
+  let dummy = new Node(0);
+  let current = dummy;
+  let currentHead = 1;
+  while (head1 && head2) {
+    if (currentHead === 1) {
+      current.next = head1;
+      head1 = head1.next;
+      currentHead = 2;
+    } else {
+      current.next = head2;
+      head2 = head2.next;
+      currentHead = 1;
+    }
+    current = current.next;
   }
-  head2.next = mergeLinkedLists(head1, head2.next);
-  return head2;
+  current.next = head1 || head2;
+  return dummy.next;
 }
 
-function rotateLinkedList(head, k) {
+function rotate(head, k) {
   let current = head;
   let length = 1;
   while (current.next) {
@@ -198,21 +349,31 @@ function rotateLinkedList(head, k) {
 }
 
 const LinkedList = {
-  createLinkedListFromArray,
-  convertLinkedListToArray,
-  convertLinkedListToObject,
-  searchInLinkedList,
-  findLengthOfLinkedList,
-  findNthNodeInLinkedList,
-  findMiddleOfLinkedList,
+  createHead,
+  createFromArray,
+  convertToArray,
+  convertToObject,
+  clone,
+  search,
+  find,
+  findLength,
+  findNthNode,
+  findMiddle,
   findNthNodeFromEnd,
-  reverseLinkedList,
-  detectCycleInLinkedList,
-  findCycleInLinkedList,
-  removeCycleInLinkedList,
-  mergeTwoSortedLinkedLists,
-  mergeLinkedLists,
-  rotateLinkedList,
+  add,
+  insert,
+  replace,
+  removeIndex,
+  removeAfterIndex,
+  reverse,
+  detectCycle,
+  findCycle,
+  removeCycle,
+  mergeTwoSorted,
+  merge,
+  rotate,
+  combine,
+  removeValue,
 };
 
 module.exports = LinkedList;
