@@ -184,7 +184,30 @@ function replace(head, index, value) {
   return head;
 }
 
+function replaceNode(head, node, newNode) {
+  let current = head;
+  let prev = null;
+  let hitHead = false;
+  while (current && (!hitHead || current !== head)) {
+    if (current === node) {
+      if (prev) {
+        prev.next = newNode;
+      } else {
+        head = newNode;
+      }
+      return head;
+    }
+    prev = current;
+    current = current.next;
+    if (current === head) {
+      hitHead = true;
+    }
+  }
+  return head;
+}
+
 function insert(head, index, value) {
+  if (!head || detectCycle(head)) return head;
   if (index === 0) {
     let newNode = new Node(value);
     newNode.next = head;
@@ -201,6 +224,7 @@ function insert(head, index, value) {
 }
 
 function removeIndex(head, index) {
+  if (!head || detectCycle(head)) return head;
   if (index === 0) {
     return head.next;
   }
@@ -209,6 +233,28 @@ function removeIndex(head, index) {
     current = current.next;
   }
   current.next = current.next.next;
+  return head;
+}
+
+function removeNode(head, node) {
+  let current = head;
+  let prev = null;
+  let hitHead = false;
+  while (current && (!hitHead || current !== head)) {
+    if (current === node) {
+      if (prev) {
+        prev.next = current.next;
+      } else {
+        head = current.next;
+      }
+      return head;
+    }
+    if (current === head) {
+      hitHead = true;
+    }
+    prev = current;
+    current = current.next;
+  }
   return head;
 }
 
@@ -237,16 +283,22 @@ function removeValue(head, value) {
 function reverse(head) {
   let current = head;
   let prev = null;
-  while (current) {
+  let hitHead = false;
+  while (current && (!hitHead || current !== head)) {
     let next = current.next;
     current.next = prev;
     prev = current;
     current = next;
+    if (current === head) {
+      hitHead = true;
+    }
   }
   return prev;
 }
 
 function combine(head1, head2) {
+  if (!head1 || detectCycle(head1)) return null;
+  if (!head2 || detectCycle(head2)) return null;
   let current = head1;
   while (current.next) {
     current = current.next;
@@ -304,6 +356,8 @@ function removeCycle(head) {
 }
 
 function mergeTwoSorted(head1, head2) {
+  if (!head1 || detectCycle(head1)) return null;
+  if (!head2 || detectCycle(head2)) return null;
   let dummy = new Node(0);
   let current = dummy;
   while (head1 && head2) {
@@ -327,6 +381,7 @@ function merge(head1, head2) {
   if (!head2) {
     return head1;
   }
+  if (detectCycle(head1) || detectCycle(head2)) return null;
   let dummy = new Node(0);
   let current = dummy;
   let currentHead = 1;
@@ -347,6 +402,7 @@ function merge(head1, head2) {
 }
 
 function rotate(head, k) {
+  if (!head || detectCycle(head)) return null;
   let current = head;
   let length = 1;
   while (current.next) {
