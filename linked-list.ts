@@ -1,4 +1,6 @@
-class Node {
+class NodeObject {
+  value: any;
+  next: NodeObject | null;
   constructor(x) {
     this.value = x;
     this.next = null;
@@ -6,40 +8,40 @@ class Node {
 }
 
 // converions
-function createHead(value) {
-  return new Node(value);
+function createHead(value: any) {
+  return new NodeObject(value);
 }
 
-function createFromArray(array) {
+function createFromArray(array: any[]) {
   if (array.length === 0) {
     return null;
   }
-  let head = new Node(array[0]);
+  let head = new NodeObject(array[0]);
   let current = head;
   for (let i = 1; i < array.length; i++) {
-    current.next = new Node(array[i]);
+    current.next = new NodeObject(array[i]);
     current = current.next;
   }
   return head;
 }
 
-function createCircularFromArray(array) {
+function createCircularFromArray(array: any[]) {
   if (array.length === 0) {
     return null;
   }
-  let head = new Node(array[0]);
+  let head = new NodeObject(array[0]);
   let current = head;
   for (let i = 1; i < array.length; i++) {
-    current.next = new Node(array[i]);
+    current.next = new NodeObject(array[i]);
     current = current.next;
   }
   current.next = head;
   return head;
 }
 
-function convertToArray(head) {
-  let current = head;
-  let array = [];
+function convertToArray(head: NodeObject) {
+  let current: NodeObject | null = head;
+  let array: any[] = [];
   let headHit = false;
   while (current && (!headHit || current !== head)) {
     array.push(current.value);
@@ -51,8 +53,8 @@ function convertToArray(head) {
   return array;
 }
 
-function convertToObject(head) {
-  let current = head;
+function convertToObject(head: NodeObject) {
+  let current: NodeObject | null = head;
   let object = {};
   let i = 0;
   let headHit = false;
@@ -67,14 +69,14 @@ function convertToObject(head) {
   return object;
 }
 
-function clone(head) {
-  let dummy = new Node(0);
+function clone(head: NodeObject) {
+  let dummy = new NodeObject(0);
   let dummyHead = dummy;
   let headHit = false;
 
-  let curr = head;
+  let curr: NodeObject | null = head;
   while (curr && (!headHit || curr !== head)) {
-    dummy.next = new Node(curr.value);
+    dummy.next = new NodeObject(curr.value);
     dummy = dummy.next;
     curr = curr.next;
     if (curr === head) {
@@ -85,8 +87,8 @@ function clone(head) {
 }
 
 // search
-function search(head, value) {
-  let current = head;
+function search(head: NodeObject, value: any) {
+  let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
     if (current.value === value) {
@@ -100,8 +102,8 @@ function search(head, value) {
   return false;
 }
 
-function find(head, value) {
-  let current = head;
+function find(head: NodeObject, value: any) {
+  let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
     if (current.value === value) {
@@ -115,8 +117,8 @@ function find(head, value) {
   return null;
 }
 
-function findLength(head) {
-  let current = head;
+function findLength(head: NodeObject) {
+  let current: NodeObject | null = head;
   let length = 0;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -129,64 +131,67 @@ function findLength(head) {
   return length;
 }
 
-function findNthNode(head, n) {
-  let current = head;
+function findNthNode(head: NodeObject, n: number) {
+  let current: NodeObject | null = head;
   for (let i = 0; i < n; i++) {
-    current = current.next;
+    current = current?.next || null;
   }
   return current;
 }
 
-function findMiddle(head) {
+function findMiddle(head: NodeObject) {
   if (!head || detectCycle(head)) return null;
-  let slow = head;
-  let fast = head;
+  let slow: NodeObject | null = head;
+  let fast: NodeObject | null = head;
   while (fast && fast.next) {
-    slow = slow.next;
+    slow = slow?.next || null;
     fast = fast.next.next;
   }
   return slow;
 }
 
-function findNthNodeFromEnd(head, n) {
+function findNthNodeFromEnd(head: NodeObject, n: number) {
   if (!head || detectCycle(head)) return null;
-  let slow = head;
-  let fast = head;
+  let slow: NodeObject | null = head;
+  let fast: NodeObject | null = head;
   for (let i = 0; i < n; i++) {
-    fast = fast.next;
+    fast = fast?.next || null;
   }
   while (fast) {
-    slow = slow.next;
+    slow = slow?.next || null;
     fast = fast.next;
   }
   return slow;
 }
 
 // operations
-function add(head, value) {
-  if (!head) return new Node(value);
+function add(head: NodeObject, value: any) {
+  if (!head) return new NodeObject(value);
   if (detectCycle(head)) return head;
   let current = head;
   while (current.next) {
     current = current.next;
   }
-  current.next = new Node(value);
+  current.next = new NodeObject(value);
   return head;
 }
 
-function replace(head, index, value) {
+function replace(head: NodeObject, index: number, value: any) {
   if (!head || detectCycle(head)) return head;
-  let current = head;
+  let current: NodeObject | null = head;
   for (let i = 0; i < index; i++) {
-    current = current.next;
+    current = current?.next || null;
+  }
+  if (!current) {
+    return head;
   }
   current.value = value;
   return head;
 }
 
-function replaceNode(head, node, newNode) {
-  let current = head;
-  let prev = null;
+function replaceNode(head: NodeObject, node: NodeObject, newNode: NodeObject) {
+  let current: NodeObject | null = head;
+  let prev: NodeObject | null = null;
   let hitHead = false;
   while (current && (!hitHead || current !== head)) {
     if (current === node) {
@@ -206,70 +211,108 @@ function replaceNode(head, node, newNode) {
   return head;
 }
 
-function insert(head, index, value) {
+function insert(head: NodeObject, index: number, value: any) {
   if (!head || detectCycle(head)) return head;
   if (index === 0) {
-    let newNode = new Node(value);
+    let newNode = new NodeObject(value);
     newNode.next = head;
     return newNode;
   }
-  let current = head;
+  let current: NodeObject | null = head;
   for (let i = 0; i < index - 1; i++) {
-    current = current.next;
+    current = current?.next || null;
   }
-  let newNode = new Node(value);
+  if (!current) {
+    return head;
+  }
+  let newNode = new NodeObject(value);
   newNode.next = current.next;
   current.next = newNode;
   return head;
 }
 
-function removeIndex(head, index) {
+function removeIndex(head: NodeObject, index: number) {
   if (!head || detectCycle(head)) return head;
   if (index === 0) {
     return head.next;
   }
-  let current = head;
+  let current: NodeObject | null = head;
   for (let i = 0; i < index - 1; i++) {
-    current = current.next;
+    current = current?.next || null;
   }
-  current.next = current.next.next;
+  if (!current || !current.next) {
+    return head;
+  }
+  current.next = current.next?.next || null;
   return head;
 }
 
-function removeNode(head, node) {
-  let current = head;
-  let prev = null;
-  let hitHead = false;
-  while (current && (!hitHead || current !== head)) {
-    if (current === node) {
-      if (prev) {
-        prev.next = current.next;
-      } else {
-        head = current.next;
-      }
-      return head;
-    }
+function removeNodeCircular(head: NodeObject, node: NodeObject) {
+  let current: NodeObject | null = head;
+  let prev: NodeObject = head;
+  let headHit = false;
+  // this loop is entirely here just to get the previous node in the case of the head node is the one to be removed
+  while (current && (!headHit || current !== head)) {
+    prev = current;
+    current = current.next;
     if (current === head) {
-      hitHead = true;
+      headHit = true;
+    }
+  }
+  headHit = false;
+  let currentHead: NodeObject | null = head;
+  while (current && (!headHit || current !== head)) {
+    if (current === node) {
+      prev.next = current.next;
+      if (current === currentHead) {
+        currentHead = current.next;
+      }
+      return currentHead;
+    }
+    if (current === currentHead) {
+      headHit = true;
     }
     prev = current;
     current = current.next;
   }
-  return head;
+  return currentHead;
 }
 
-function removeAfterIndex(head, index) {
-  let current = head;
-  for (let i = 0; i < index; i++) {
+function removeNode(head: NodeObject, node: NodeObject) {
+  if (detectCycle(head)) return head;
+  let currentHead: NodeObject | null = head;
+  let current: NodeObject | null = head;
+  let prev: NodeObject | null = null;
+  while (current) {
+    if (current === node) {
+      if (prev) {
+        prev.next = current.next;
+      } else {
+        currentHead = current.next;
+      }
+      return currentHead;
+    }
+    prev = current;
     current = current.next;
+  }
+  return currentHead;
+}
+
+function removeAfterIndex(head: NodeObject, index: number) {
+  let current: NodeObject | null = head;
+  for (let i = 0; i < index; i++) {
+    current = current?.next || null;
+  }
+  if (!current || !current.next) {
+    return head;
   }
   current.next = null;
   return head;
 }
 
-function removeValue(head, value) {
-  let dummy = { next: head };
-  let current = dummy;
+function removeValue(head: NodeObject, value: any) {
+  let dummy = { value: 0, next: head };
+  let current: NodeObject = dummy;
   while (current.next) {
     if (current.next.value === value) {
       current.next = current.next.next;
@@ -280,9 +323,9 @@ function removeValue(head, value) {
   return dummy.next;
 }
 
-function reverse(head) {
-  let current = head;
-  let prev = null;
+function reverse(head: NodeObject) {
+  let current: NodeObject | null = head;
+  let prev: NodeObject | null = null;
   let hitHead = false;
   while (current && (!hitHead || current !== head)) {
     let next = current.next;
@@ -296,9 +339,9 @@ function reverse(head) {
   return prev;
 }
 
-function combine(head1, head2) {
-  if (!head1 || detectCycle(head1)) return null;
-  if (!head2 || detectCycle(head2)) return null;
+function combine(head1: NodeObject, head2: NodeObject) {
+  if (detectCycle(head1)) return null;
+  if (detectCycle(head2)) return null;
   let current = head1;
   while (current.next) {
     current = current.next;
@@ -307,11 +350,11 @@ function combine(head1, head2) {
   return head1;
 }
 
-function detectCycle(head) {
-  let slow = head;
-  let fast = head;
+function detectCycle(head: NodeObject) {
+  let slow: NodeObject | null = head;
+  let fast: NodeObject | null = head;
   while (fast && fast.next) {
-    slow = slow.next;
+    slow = slow?.next || null;
     fast = fast.next.next;
     if (slow === fast) {
       return true;
@@ -320,11 +363,11 @@ function detectCycle(head) {
   return false;
 }
 
-function findCycle(head) {
-  let slow = head;
-  let fast = head;
+function findCycle(head: NodeObject) {
+  let slow: NodeObject | null = head;
+  let fast: NodeObject | null = head;
   while (fast && fast.next) {
-    slow = slow.next;
+    slow = slow?.next || null;
     fast = fast.next.next;
     if (slow === fast) {
       break;
@@ -335,30 +378,29 @@ function findCycle(head) {
   }
   slow = head;
   while (slow !== fast) {
-    slow = slow.next;
-    fast = fast.next;
+    slow = slow?.next || null;
+    fast = fast?.next || null;
   }
   return slow;
 }
 
-function removeCycle(head) {
-  let cycleNode = findCycleInLinkedList(head);
+function removeCycle(head: NodeObject) {
+  let cycleNode: NodeObject | null = findCycle(head);
   if (!cycleNode) {
     return head;
   }
-  let current = head;
-  while (current.next !== cycleNode.next) {
-    current = current.next;
-    cycleNode = cycleNode.next;
+  let current: NodeObject | null = head;
+  while (current?.next !== cycleNode) {
+    current = current?.next || null;
   }
   cycleNode.next = null;
   return head;
 }
 
-function mergeTwoSorted(head1, head2) {
+function mergeTwoSorted(head1: NodeObject | null, head2: NodeObject | null) {
   if (!head1 || detectCycle(head1)) return null;
   if (!head2 || detectCycle(head2)) return null;
-  let dummy = new Node(0);
+  let dummy = new NodeObject(0);
   let current = dummy;
   while (head1 && head2) {
     if (head1.value < head2.value) {
@@ -374,7 +416,7 @@ function mergeTwoSorted(head1, head2) {
   return dummy.next;
 }
 
-function merge(head1, head2) {
+function merge(head1: NodeObject | null, head2: NodeObject | null) {
   if (!head1) {
     return head2;
   }
@@ -382,7 +424,7 @@ function merge(head1, head2) {
     return head1;
   }
   if (detectCycle(head1) || detectCycle(head2)) return null;
-  let dummy = new Node(0);
+  let dummy = new NodeObject(0);
   let current = dummy;
   let currentHead = 1;
   while (head1 && head2) {
@@ -401,25 +443,28 @@ function merge(head1, head2) {
   return dummy.next;
 }
 
-function rotate(head, k) {
+function rotate(head: NodeObject, k: number) {
   if (!head || detectCycle(head)) return null;
-  let current = head;
+  let currentHead: NodeObject | null = head;
+  let current: NodeObject | null = head;
   let length = 1;
   while (current.next) {
     current = current.next;
     length++;
   }
-  current.next = head;
+  current.next = currentHead;
   k = k % length;
   for (let i = 0; i < length - k; i++) {
-    current = current.next;
+    current = current?.next || null;
   }
-  head = current.next;
-  current.next = null;
+  currentHead = current?.next || null;
+  if (current) {
+    current.next = null;
+  }
   return head;
 }
 
-const LinkedList = {
+export const LinkedList = {
   createHead,
   createFromArray,
   createCircularFromArray,
@@ -447,5 +492,4 @@ const LinkedList = {
   combine,
   removeValue,
 };
-
-module.exports = LinkedList;
+// module.exports = LinkedListOperations;
