@@ -2,9 +2,11 @@
   "name": "linked-list-operations",
   "version": "1.0.0",
   "description": "Basic operations on a linked list along with conversions",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -19,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/masonwaller/linked-list-converter/issues"
   },
-  "homepage": "https://github.com/masonwaller/linked-list-converter#readme"
+  "homepage": "https://github.com/masonwaller/linked-list-converter#readme",
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "typescript": "^5.6.2"
+  }
 }

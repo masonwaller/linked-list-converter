@@ -1,7 +1,7 @@
 class NodeObject {
   value: any;
   next: NodeObject | null;
-  constructor(x) {
+  constructor(x: any) {
     this.value = x;
     this.next = null;
   }
@@ -55,7 +55,7 @@ function convertToArray(head: NodeObject) {
 
 function convertToObject(head: NodeObject) {
   let current: NodeObject | null = head;
-  let object = {};
+  let object: any = {};
   let i = 0;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -328,7 +328,7 @@ function reverse(head: NodeObject) {
   let prev: NodeObject | null = null;
   let hitHead = false;
   while (current && (!hitHead || current !== head)) {
-    let next = current.next;
+    let next: NodeObject | null = current.next;
     current.next = prev;
     prev = current;
     current = next;
