@@ -338,6 +338,7 @@ function reverse(head: NodeObject) {
   }
   return prev;
 }
+//TODO: add a sort function with dynaic compare function
 
 function combine(head1: NodeObject, head2: NodeObject) {
   if (detectCycle(head1)) return null;
@@ -398,6 +399,7 @@ function removeCycle(head: NodeObject) {
 }
 
 function mergeTwoSorted(head1: NodeObject | null, head2: NodeObject | null) {
+  // TODO: can make dynamic by having user pass in a compare function
   if (!head1 || detectCycle(head1)) return null;
   if (!head2 || detectCycle(head2)) return null;
   let dummy = new NodeObject(0);
@@ -444,6 +446,7 @@ function merge(head1: NodeObject | null, head2: NodeObject | null) {
 }
 
 function rotate(head: NodeObject, k: number) {
+  // k is the number end nodes to move to the front
   if (!head || detectCycle(head)) return null;
   let currentHead: NodeObject | null = head;
   let current: NodeObject | null = head;
@@ -461,7 +464,7 @@ function rotate(head: NodeObject, k: number) {
   if (current) {
     current.next = null;
   }
-  return head;
+  return currentHead;
 }
 
 export const LinkedList = {
@@ -491,5 +494,8 @@ export const LinkedList = {
   rotate,
   combine,
   removeValue,
+  replaceNode,
+  removeNodeCircular,
+  removeNode,
 };
 // module.exports = LinkedListOperations;
