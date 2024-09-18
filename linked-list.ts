@@ -76,7 +76,9 @@ function clone(head: NodeObject) {
 
   let curr: NodeObject | null = head;
   while (curr && (!headHit || curr !== head)) {
-    dummy.next = new NodeObject(curr.value);
+    dummy.next = new NodeObject(
+      typeof curr.value === "object" ? { ...curr.value } : curr.value
+    );
     dummy = dummy.next;
     curr = curr.next;
     if (curr === head) {
@@ -88,6 +90,7 @@ function clone(head: NodeObject) {
 
 // search
 function search(head: NodeObject, value: any) {
+  //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -103,6 +106,7 @@ function search(head: NodeObject, value: any) {
 }
 
 function find(head: NodeObject, value: any) {
+  //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -311,6 +315,7 @@ function removeAfterIndex(head: NodeObject, index: number) {
 }
 
 function removeValue(head: NodeObject, value: any) {
+  //TODO: add a compare function for dynamic search
   let dummy = { value: 0, next: head };
   let current: NodeObject = dummy;
   while (current.next) {
@@ -338,7 +343,7 @@ function reverse(head: NodeObject) {
   }
   return prev;
 }
-//TODO: add a sort function with dynaic compare function
+//TODO: add a sort function with dynamic compare function
 
 function combine(head1: NodeObject, head2: NodeObject) {
   if (detectCycle(head1)) return null;
