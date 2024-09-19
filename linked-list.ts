@@ -344,7 +344,7 @@ function reverse(head: NodeObject) {
   }
   return prev;
 }
-//TODO: add a sort function with dynamic compare function
+
 function sort(head: NodeObject, compare: Function) {
   const isCircular = detectCycle(head);
   let current: NodeObject | null = head;
@@ -527,5 +527,6 @@ export const LinkedList = {
   replaceNode,
   removeNodeCircular,
   removeNode,
+  sort,
 };
 // module.exports = LinkedListOperations;
