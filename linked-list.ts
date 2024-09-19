@@ -316,6 +316,7 @@ function removeAfterIndex(head: NodeObject, index: number) {
 
 function removeValue(head: NodeObject, value: any) {
   //TODO: add a compare function for dynamic search
+  //TODO: make it work with circular linked list
   let dummy = { value: 0, next: head };
   let current: NodeObject = dummy;
   while (current.next) {
@@ -344,6 +345,30 @@ function reverse(head: NodeObject) {
   return prev;
 }
 //TODO: add a sort function with dynamic compare function
+function sort(head: NodeObject, compare: Function) {
+  const isCircular = detectCycle(head);
+  let current: NodeObject | null = head;
+  let hitHead = false;
+  const values = [];
+  while (current && (!hitHead || current !== head)) {
+    values.push(current.value);
+    current = current.next;
+    if (current === head) {
+      hitHead = true;
+    }
+  }
+  values.sort((a, b) => compare(a, b));
+  let dummy = new NodeObject(0);
+  let currentDummy = dummy;
+  for (let i = 0; i < values.length; i++) {
+    currentDummy.next = new NodeObject(values[i]);
+    currentDummy = currentDummy.next;
+  }
+  if (isCircular) {
+    currentDummy.next = dummy.next;
+  }
+  return dummy.next;
+}
 
 function combine(head1: NodeObject, head2: NodeObject) {
   if (detectCycle(head1)) return null;
