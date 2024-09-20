@@ -345,29 +345,57 @@ function reverse(head: NodeObject) {
   return prev;
 }
 
-function sort(head: NodeObject, compare: Function) {
-  const isCircular = detectCycle(head);
-  let current: NodeObject | null = head;
-  let hitHead = false;
-  const values = [];
-  while (current && (!hitHead || current !== head)) {
-    values.push(current.value);
-    current = current.next;
-    if (current === head) {
-      hitHead = true;
+// Function to split the singly linked list into two halves
+function split(head: NodeObject): NodeObject {
+  let fast: NodeObject = head;
+  let slow: NodeObject = head;
+
+  // Move fast pointer two steps and slow pointer
+  // one step until fast reaches the end
+  while (fast && fast.next) {
+    fast = fast.next.next;
+    if (fast) {
+      slow = slow.next;
     }
   }
-  values.sort((a, b) => compare(a, b));
-  let dummy = new NodeObject(0);
-  let currentDummy = dummy;
-  for (let i = 0; i < values.length; i++) {
-    currentDummy.next = new NodeObject(values[i]);
-    currentDummy = currentDummy.next;
+
+  // Split the list into two halves
+  let second = slow.next;
+  slow.next = null;
+  return second;
+}
+
+// Function to merge two sorted singly linked lists
+function mergeLists(first: NodeObject, second: NodeObject) {
+  // If either list is empty, return the other list
+  if (!first) return second;
+  if (!second) return first;
+
+  // Pick the smaller value between first and second nodes
+  if (first.value < second.value) {
+    first.next = merge(first.next, second);
+    return first;
+  } else {
+    second.next = merge(first, second.next);
+    return second;
   }
-  if (isCircular) {
-    currentDummy.next = dummy.next;
-  }
-  return dummy.next;
+}
+
+// Function to perform merge sort on a singly linked list
+function mergeSort(head: NodeObject) {
+  // Base case: if the list is empty or has only one node,
+  // it's already sorted
+  if (!head || !head.next) return head;
+
+  // Split the list into two halves
+  let second: NodeObject = split(head);
+
+  // Recursively sort each half
+  head = mergeSort(head);
+  second = mergeSort(second);
+
+  // Merge the two sorted halves
+  return mergeLists(head, second);
 }
 
 function combine(head1: NodeObject, head2: NodeObject) {
