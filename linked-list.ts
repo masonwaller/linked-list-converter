@@ -347,7 +347,7 @@ function reverse(head: NodeObject) {
 
 // Function to split the singly linked list into two halves
 function split(head: NodeObject): NodeObject {
-  let fast: NodeObject = head;
+  let fast: NodeObject | null = head;
   let slow: NodeObject = head;
 
   // Move fast pointer two steps and slow pointer
@@ -355,6 +355,7 @@ function split(head: NodeObject): NodeObject {
   while (fast && fast.next) {
     fast = fast.next.next;
     if (fast) {
+      // @ts-ignore: to stop ts from complaining about slow possibly being null, if fast is not null, slow will not be null
       slow = slow.next;
     }
   }
@@ -362,6 +363,7 @@ function split(head: NodeObject): NodeObject {
   // Split the list into two halves
   let second = slow.next;
   slow.next = null;
+  // @ts-ignore: to stop ts from complaining about slow possibly being null, if fast is not null, slow will not be null
   return second;
 }
 
@@ -555,6 +557,6 @@ export const LinkedList = {
   replaceNode,
   removeNodeCircular,
   removeNode,
-  sort,
+  mergeSort,
 };
 // module.exports = LinkedListOperations;
