@@ -470,14 +470,18 @@ function removeCycle(head: NodeObject) {
   return head;
 }
 
-function mergeTwoSorted(head1: NodeObject | null, head2: NodeObject | null) {
+function mergeTwoSorted(
+  head1: NodeObject | null,
+  head2: NodeObject | null,
+  compare: (a: any, b: any) => boolean = (a, b) => a < b
+) {
   // TODO: can make dynamic by having user pass in a compare function
   if (!head1 || detectCycle(head1)) return null;
   if (!head2 || detectCycle(head2)) return null;
   let dummy = new NodeObject(0);
   let current = dummy;
   while (head1 && head2) {
-    if (head1.value < head2.value) {
+    if (compare(head1.value, head2.value)) {
       current.next = head1;
       head1 = head1.next;
     } else {
