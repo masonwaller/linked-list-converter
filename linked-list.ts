@@ -322,13 +322,16 @@ function removeAfterIndex(head: NodeObject, index: number) {
   return head;
 }
 
-function removeValue(head: NodeObject, value: any) {
+function removeValue(
+  head: NodeObject,
+  value: any,
+  searchFunction: (a: any) => boolean = (a) => a
+) {
   //TODO: add a compare function for dynamic search
-  //TODO: make it work with circular linked list
   let dummy = { value: 0, next: head };
   let current: NodeObject = dummy;
   while (current.next) {
-    if (current.next.value === value) {
+    if (searchFunction(current.next.value) === value) {
       current.next = current.next.next;
     } else {
       current = current.next;
