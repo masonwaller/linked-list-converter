@@ -89,7 +89,11 @@ function clone(head: NodeObject) {
 }
 
 // search
-function search(head: NodeObject, value: any, searchFunction?: Function) {
+function search(
+  head: NodeObject,
+  value: any,
+  searchFunction?: (value: any) => boolean
+) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
@@ -107,12 +111,18 @@ function search(head: NodeObject, value: any, searchFunction?: Function) {
   return false;
 }
 
-function find(head: NodeObject, value: any) {
+function find(
+  head: NodeObject,
+  value: any,
+  searchFunction?: (value: any) => boolean
+) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
-    if (current.value === value) {
+    if (
+      searchFunction ? searchFunction(current.value) : current.value === value
+    ) {
       return current;
     }
     current = current.next;
