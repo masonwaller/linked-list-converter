@@ -112,15 +112,13 @@ function search(
 function find(
   head: NodeObject,
   value: any,
-  searchFunction?: (value: any) => boolean
+  searchFunction: (value: any) => boolean = (a) => a
 ) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
-    if (
-      searchFunction ? searchFunction(current.value) : current.value === value
-    ) {
+    if (searchFunction(current.value) === value) {
       return current;
     }
     current = current.next;
