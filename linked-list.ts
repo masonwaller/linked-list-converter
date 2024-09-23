@@ -89,12 +89,14 @@ function clone(head: NodeObject) {
 }
 
 // search
-function search(head: NodeObject, value: any) {
+function search(head: NodeObject, value: any, searchFunction?: Function) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
-    if (current.value === value) {
+    if (
+      searchFunction ? searchFunction(current.value) : current.value === value
+    ) {
       return true;
     }
     current = current.next;
