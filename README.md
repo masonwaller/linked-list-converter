@@ -205,3 +205,20 @@ Output: {
     }
 }
 ```
+
+### findLength(head: NodeObject): number
+
+Provide a linked list, circular or not, and it'll find the length of the list.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.findLength(list)
+
+Output: 3
+```
