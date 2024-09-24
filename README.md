@@ -140,7 +140,7 @@ Output:
 
 ### search(head: NodeObject, value: any, searchFunction: (value: any) => boolean): boolean
 
-Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value
+Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value.
 
 ```
 const list = {
@@ -164,4 +164,44 @@ const nestedValueList = {
 LinkedList.search(list, 2, (val) => val.this)
 
 Output: true
+```
+
+### find(head: NodeObject, value: any, searchFunction: (value: any) => boolean): NodeObject | null
+
+Provide a linked list, circular or not, and it'll find the provided value and return that Node, or if it cannot find the value it will return null. You can also pass in a searchFunction if you are looking for a nested value.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.find(list, 2)
+
+Output: {
+    value: 2,
+    next: {
+        value: 3,
+        next: null
+    }
+}
+
+const nestedValueList = {
+    value: { this: 1, that: 1 },
+    next: {
+        value: { this: 2, that: 2 },
+        next: { value: { this: 3, that: 3 }, next: null }
+    }
+}
+LinkedList.find(list, 2, (val) => val.this)
+
+Output: {
+    value: { this: 2, that: 2 },
+    next: {
+        value: { this: 3, that: 3 },
+        next: null
+    }
+}
 ```
