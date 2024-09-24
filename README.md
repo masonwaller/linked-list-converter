@@ -242,3 +242,26 @@ Output: {
     next: null
 }
 ```
+
+### findMiddle(head: NodeObject): NodeObject | null
+
+Provide a noncircular linked list and it'll return the middle node or null if the list is circular or nonexistent.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.findMiddle(list)
+
+Output: {
+    value: 3,
+    next: {
+        value: 3
+        next: null
+    }
+}
+```
