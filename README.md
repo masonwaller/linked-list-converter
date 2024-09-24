@@ -29,7 +29,7 @@ const { LinkedList } = require("linked-list-operations");
 
 The following functions are supported in thie package:
 
-### createHead(value: any)
+### createHead(value: any): Nodeobject
 
 Provide any value and it will return a starter node with the given value.
 
@@ -43,7 +43,7 @@ Output:
 }
 ```
 
-### createFromArray(array: any[])
+### createFromArray(array: any[]): NodeObject
 
 Provide an array with any values and it will return a series of nodes in a linked list.
 
@@ -60,7 +60,7 @@ Output:
 }
 ```
 
-### createCircularFromArray(array: any[])
+### createCircularFromArray(array: any[]): NodeObject
 
 Provide an array of any values and it will return a circular series of nodes in a looped linked list.
 
@@ -77,7 +77,7 @@ Output:
 }
 ```
 
-### convertToArray(head: NodeObject)
+### convertToArray(head: NodeObject): any[]
 
 Provide a linked list of NodeObjects, circular or not, and it'll return an array.
 
@@ -94,7 +94,7 @@ Output:
 [1,2,3]
 ```
 
-### convertToObject(head: NodeObject)
+### convertToObject(head: NodeObject): any{}
 
 Provide a linked list of NodeObjects, circular or not, and it'll return an object with the spot in the list as the key and the value is the value of the NodeObject.
 
@@ -115,7 +115,7 @@ Output:
 }
 ```
 
-### clone(head: NodeObject)
+### clone(head: NodeObject): NodeObject
 
 Provide a linked list, circular or not, and it'll copy and send back a clone or deep copy of that linked list. Used to not alter an existing linked list.
 
@@ -136,4 +136,32 @@ Output:
         next: { value: 3, next: null }
     }
 }
+```
+
+### search(head: NodeObject, value: any, searchFunction: (value: any) => boolean): boolean
+
+Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.search(list, 1)
+
+Output: true
+
+const nestedValueList = {
+    value: { this: 1, that: 1 },
+    next: {
+        value: { this: 2, that: 2 },
+        next: { value: { this: 3, that: 3 }, next: null }
+    }
+}
+LinkedList.search(list, 2, (val) => val.this)
+
+Output: true
 ```
