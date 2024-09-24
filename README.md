@@ -265,3 +265,23 @@ Output: {
     }
 }
 ```
+
+### findNthNodeFromEnd(head: NodeObject, n: number): NodeObject | null
+
+Provide a noncircular linked list and it'll return the nth node from the end of the list or null if the list is not long enough.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.findNthNodeFromEnd(list, 1)
+
+Output: {
+    value: 3,
+    next: null
+}
+```
