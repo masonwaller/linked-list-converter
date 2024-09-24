@@ -222,3 +222,23 @@ LinkedList.findLength(list)
 
 Output: 3
 ```
+
+### findNthNode(head: NodeObject, n: number): NodeObject | null
+
+Provide a noncircular linked list and it'll return the nth node or null if the list is not long enough.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.findNthNode(list, 3)
+
+Output: {
+    value: 3,
+    next: null
+}
+```
