@@ -285,3 +285,26 @@ Output: {
     next: null
 }
 ```
+
+### add(head: NodeObject, value: any): NodeObject
+
+Provide a noncircular linked list and it'll return the same list with the new value added onto the end.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.add(list, 3)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next null }
+    }
+}
+```
