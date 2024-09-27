@@ -389,13 +389,14 @@ function mergeLists(first: NodeObject, second: NodeObject) {
     first.next = merge(first.next, second);
     return first;
   } else {
-    second.next = merge(first, second.next);
+    second.next = merge(first, second.next); //TODO: this function is incorrect I think, references my own merge function
     return second;
   }
 }
 
 // Function to perform merge sort on a singly linked list
 function mergeSort(head: NodeObject) {
+  //TODO: add a compare function for dynamic sorting
   // Base case: if the list is empty or has only one node,
   // it's already sorted
   if (!head || !head.next) return head;

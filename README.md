@@ -504,6 +504,32 @@ LinkedList.reverse(list)
 
 Output: {
     value: 2,
-    next: { value: 1, next: null }
+    next: {
+        value: 1,
+        next: null
+    }
+}
+```
+
+### mergeSort(head: NodeObject): NodeObject
+
+Provide a noncircular linked list and it'll return a new sorted list. Defaults to ascending order.
+
+```
+const list = {
+    value: 2,
+    next: {
+        value: 1,
+        next: null
+    }
+}
+LinkedList.removeValue(list, 1)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
 }
 ```
