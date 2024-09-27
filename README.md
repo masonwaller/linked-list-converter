@@ -140,7 +140,7 @@ Output:
 
 ### search(head: NodeObject, value: any, searchFunction?: (value: any) => boolean): boolean
 
-Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed.
+Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed, defaults to (value) => value.
 
 ```
 const list = {
@@ -168,7 +168,7 @@ Output: true
 
 ### find(head: NodeObject, value: any, searchFunction?: (value: any) => boolean): NodeObject | null
 
-Provide a linked list, circular or not, and it'll find the provided value and return that Node, or if it cannot find the value it will return null. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed.
+Provide a linked list, circular or not, and it'll find the provided value and return that Node, or if it cannot find the value it will return null. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed, defaults to (value) => value.
 
 ```
 const list = {
@@ -468,9 +468,9 @@ Output: {
 }
 ```
 
-### removeValue(head: NodeObject, value: any, searchFunction?: (a: any) => boolean): NodeObject | null
+### removeValue(head: NodeObject, value: any, searchFunction?: (value: any) => boolean): NodeObject | null
 
-Provide a noncircular linked list and it'll return the same list with all the values that equal the provided value. You can also provide a search function for nested values or values that need to be computed.
+Provide a noncircular linked list and it'll return the same list with all the values that equal the provided value. You can also provide a search function for nested values or values that need to be computed, defaults to (value) => value.
 
 ```
 const list = {
@@ -618,5 +618,38 @@ LinkedList.removeCycle(list)
 Output: {
     value: 1,
     next: null
+}
+```
+
+### mergeTwoSorted(head1: NodeObject, head2: NodeObject, compare?: (value1: any, value2: any) => boolean): NodeObject | null
+
+Provide two sorted linked lists and it'll return one list that is also sorted. Also can add an optional compare function for nested values or values that need to be computed, defaults to (value1, value2) => value1 < value2.
+
+```
+const list1 = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: // points to node with value 2 }
+    }
+}
+const list2 = {
+    value: 1,
+    next: {
+        value: 4,
+        next: null
+    }
+}
+LinkedList.mergeTwoSorted(list1, list2)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: { value: 4, next: null }
+        }
+    }
 }
 ```
