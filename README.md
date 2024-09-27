@@ -331,3 +331,27 @@ Output: {
     }
 }
 ```
+
+### replaceNode(head: NodeObject, node: NodeObject, newNode: NodeObject): NodeObject
+
+Provide a linked list, circular or not, and it'll return the same list with the specific node being replaced by the new node.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+const oldNode = list.next
+LinkedList.replaceNode(list, oldNode, { value: 3, next: { value: 4, next: null } })
+
+Output: {
+    value: 1,
+    next: {
+        value: 3,
+        next: { value: 4, next null }
+    }
+}
+```
