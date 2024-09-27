@@ -308,3 +308,26 @@ Output: {
     }
 }
 ```
+
+### replace(head: NodeObject, index: number, value: any): NodeObject
+
+Provide a noncircular linked list and it'll return the same list with the new value replacing the value of the index provided.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.replace(list, 2, 3)
+
+Output: {
+    value: 1,
+    next: {
+        value: 3,
+        next: null
+    }
+}
+```
