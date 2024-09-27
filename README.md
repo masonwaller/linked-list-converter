@@ -560,3 +560,20 @@ Output: {
     }
 }
 ```
+
+### detectCycle(head: NodeObject): boolean
+
+Provide a linked list and it'll return a true/false value if the list is circular or not.
+
+```
+const list = {
+    value: 2,
+    next: {
+        value: 1,
+        next: null
+    }
+}
+LinkedList.detectCycle(list)
+
+Output: false
+```
