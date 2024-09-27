@@ -686,3 +686,30 @@ Output: {
     }
 }
 ```
+
+### rotate(head: NodeObject, num: number): NodeObject | null
+
+Provide a noncirculer linked list and it'll return the same list but rotated however many rotations that is provided, causing it to have a new head unless it has a full rotation. Circular linked lists will cause it to return null.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+
+LinkedList.rotate(list, 1)
+
+Output: {
+    value: 2,
+    next: {
+        value: 3,
+        next: {
+            value: 1,
+            next: null
+        }
+    }
+}
+```
