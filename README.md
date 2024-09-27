@@ -138,9 +138,9 @@ Output:
 }
 ```
 
-### search(head: NodeObject, value: any, searchFunction: (value: any) => boolean): boolean
+### search(head: NodeObject, value: any, searchFunction?: (value: any) => boolean): boolean
 
-Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value.
+Provide a linked list, circular or not, and it'll search to see if the provided value is included in the linked list returning a boolean. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed.
 
 ```
 const list = {
@@ -166,9 +166,9 @@ LinkedList.search(list, 2, (val) => val.this)
 Output: true
 ```
 
-### find(head: NodeObject, value: any, searchFunction: (value: any) => boolean): NodeObject | null
+### find(head: NodeObject, value: any, searchFunction?: (value: any) => boolean): NodeObject | null
 
-Provide a linked list, circular or not, and it'll find the provided value and return that Node, or if it cannot find the value it will return null. You can also pass in a searchFunction if you are looking for a nested value.
+Provide a linked list, circular or not, and it'll find the provided value and return that Node, or if it cannot find the value it will return null. You can also pass in a searchFunction if you are looking for a nested value or values that need to be computed.
 
 ```
 const list = {
@@ -464,6 +464,26 @@ LinkedList.removeAfterIndex(list, 0)
 
 Output: {
     value: 1,
+    next: null
+}
+```
+
+### removeValue(head: NodeObject, value: any, searchFunction?: (a: any) => boolean): NodeObject | null
+
+Provide a noncircular linked list and it'll return the same list with all the values that equal the provided value. You can also provide a search function for nested values or values that need to be computed.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.removeValue(list, 1)
+
+Output: {
+    value: 2,
     next: null
 }
 ```
