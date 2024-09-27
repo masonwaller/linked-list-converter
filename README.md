@@ -427,3 +427,23 @@ Output: {
     }
 }
 ```
+
+### removeNode(head: NodeObject, value: any): NodeObject | null
+
+Provide a noncircular linked list and it'll return the same list with the specified node removed.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.removeNode(list, { value: 2, next: null })
+
+Output: {
+    value: 1,
+    next: null
+}
+```
