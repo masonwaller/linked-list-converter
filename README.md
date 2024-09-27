@@ -621,7 +621,7 @@ Output: {
 }
 ```
 
-### mergeTwoSorted(head1: NodeObject, head2: NodeObject, compare?: (value1: any, value2: any) => boolean): NodeObject | null
+### mergeTwoSorted(head1: NodeObject | null, head2: NodeObject | null, compare?: (value1: any, value2: any) => boolean): NodeObject | null
 
 Provide two sorted linked lists and it'll return one list that is also sorted. Also can add an optional compare function for nested values or values that need to be computed, defaults to (value1, value2) => value1 < value2.
 
@@ -630,7 +630,7 @@ const list1 = {
     value: 1,
     next: {
         value: 2,
-        next: { value: 3, next: // points to node with value 2 }
+        next: { value: 3, next: null }
     }
 }
 const list2 = {
@@ -648,6 +648,39 @@ Output: {
         value: 2,
         next: {
             value: 3,
+            next: { value: 4, next: null }
+        }
+    }
+}
+```
+
+### merge(head1: NodeObject | null, head2: NodeObject | null): NodeObject | null
+
+Provide two noncircular linked lists and it'll return one list that is alternating vlaues from each list. Circular linked lists will cause it to return null.
+
+```
+const list1 = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+const list2 = {
+    value: 1,
+    next: {
+        value: 4,
+        next: null
+    }
+}
+LinkedList.merge(list1, list2)
+
+Output: {
+    value: 1,
+    next: {
+        value: 1,
+        next: {
+            value: 2,
             next: { value: 4, next: null }
         }
     }
