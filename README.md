@@ -577,3 +577,26 @@ LinkedList.detectCycle(list)
 
 Output: false
 ```
+
+### findCycle(head: NodeObject): NodeObject | null
+
+Provide a linked list, with a cycle inside it, and it'll return the cycle.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: // points to node with value 2 }
+    }
+}
+LinkedList.findCycle(list)
+
+Output: {
+    value: 2,
+    next: {
+        value: 3,
+        next: // points to node with value 2
+    }
+}
+```
