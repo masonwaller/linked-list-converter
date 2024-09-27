@@ -379,7 +379,7 @@ Output: {
 }
 ```
 
-### removeIndex(head: NodeObject, index: number): NodeObject
+### removeIndex(head: NodeObject, index: number): NodeObject | null
 
 Provide a noncircular linked list and it'll return the same list with the index provided removed from the list.
 
@@ -398,6 +398,32 @@ Output: {
     next: {
         value: 2,
         next: null
+    }
+}
+```
+
+### removeNodeCircular(head: NodeObject, node: NodeObject): NodeObject | null
+
+Provide a circular linked list and it'll return the same list with the specified node removed.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: {
+            value: 3,
+            next: // this points back at the first node, value 1
+        }
+    }
+}
+LinkedList.removeNodeCircular(list, { value: 2, next: ... })
+
+Output: {
+    value: 1,
+    next: {
+        value: 3,
+        next: // this points back at first node, value 1
     }
 }
 ```
