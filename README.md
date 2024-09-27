@@ -355,3 +355,26 @@ Output: {
     }
 }
 ```
+
+### insert(head: NodeObject, index: number, value: any): NodeObject
+
+Provide a noncircular linked list and it'll return the same list with the new value added at the provided index.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 3,
+        next: null
+    }
+}
+LinkedList.insert(list, 1, 2)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next null }
+    }
+}
+```
