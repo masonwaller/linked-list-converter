@@ -447,3 +447,23 @@ Output: {
     next: null
 }
 ```
+
+### removeAfterIndex(head: NodeObject, index: number): NodeObject
+
+Provide a linked list, circular or not, and it'll return the same list up until the index where everything after is removed. NOTE: this does break circular linked lists and makes then noncircular.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.removeAfterIndex(list, 0)
+
+Output: {
+    value: 1,
+    next: null
+}
+```
