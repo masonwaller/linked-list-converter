@@ -487,3 +487,23 @@ Output: {
     next: null
 }
 ```
+
+### reverse(head: NodeObject): NodeObject
+
+Provide a linked list, circular or not, and it'll return the list reversed.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+LinkedList.reverse(list)
+
+Output: {
+    value: 2,
+    next: { value: 1, next: null }
+}
+```
