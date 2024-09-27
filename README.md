@@ -523,13 +523,40 @@ const list = {
         next: null
     }
 }
-LinkedList.removeValue(list, 1)
+LinkedList.mergeSort(list, 1)
 
 Output: {
     value: 1,
     next: {
         value: 2,
         next: null
+    }
+}
+```
+
+### combine(head1: NodeObject, head2: NodeObject): NodeObject | null
+
+Provide two noncircular linked lists and it'll return a new linked list starting at head1 and adding head2 to the end.
+
+```
+const list1 = {
+    value: 2,
+    next: {
+        value: 1,
+        next: null
+    }
+}
+const list2 = {
+    value: 3,
+    next: null
+}
+LinkedList.combine(list1, list2)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
     }
 }
 ```
