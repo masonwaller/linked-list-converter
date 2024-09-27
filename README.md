@@ -378,3 +378,26 @@ Output: {
     }
 }
 ```
+
+### removeIndex(head: NodeObject, index: number): NodeObject
+
+Provide a noncircular linked list and it'll return the same list with the index provided removed from the list.
+
+```
+const list = {
+    value: 1,
+    next: {
+        value: 2,
+        next: { value: 3, next: null }
+    }
+}
+LinkedList.removeIndex(list, 2)
+
+Output: {
+    value: 1,
+    next: {
+        value: 2,
+        next: null
+    }
+}
+```
