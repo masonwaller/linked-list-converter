@@ -389,7 +389,7 @@ function mergeLists(first: NodeObject | null, second: NodeObject | null) {
     first.next = mergeLists(first.next, second);
     return first;
   } else {
-    second.next = mergeLists(first, second.next); //TODO: this function is incorrect I think, references my own merge function
+    second.next = mergeLists(first, second.next);
     return second;
   }
 }
