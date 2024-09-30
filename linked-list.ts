@@ -379,30 +379,30 @@ function split(head: NodeObject): NodeObject {
 }
 
 // Function to merge two sorted singly linked lists
-function mergeLists(first: NodeObject, second: NodeObject) {
+function mergeLists(first: NodeObject | null, second: NodeObject | null) {
   // If either list is empty, return the other list
   if (!first) return second;
   if (!second) return first;
 
   // Pick the smaller value between first and second nodes
   if (first.value < second.value) {
-    first.next = merge(first.next, second);
+    first.next = mergeLists(first.next, second);
     return first;
   } else {
-    second.next = merge(first, second.next); //TODO: this function is incorrect I think, references my own merge function
+    second.next = mergeLists(first, second.next); //TODO: this function is incorrect I think, references my own merge function
     return second;
   }
 }
 
 // Function to perform merge sort on a singly linked list
-function mergeSort(head: NodeObject) {
+function mergeSort(head: NodeObject | null): NodeObject | null {
   //TODO: add a compare function for dynamic sorting
   // Base case: if the list is empty or has only one node,
   // it's already sorted
   if (!head || !head.next) return head;
 
   // Split the list into two halves
-  let second: NodeObject = split(head);
+  let second: NodeObject | null = split(head);
 
   // Recursively sort each half
   head = mergeSort(head);
