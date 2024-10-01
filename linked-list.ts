@@ -94,7 +94,6 @@ function search(
   value: any,
   searchFunction: (value: any) => any = (a) => a
 ) {
-  //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -114,7 +113,6 @@ function find(
   value: any,
   searchFunction: (value: any) => any = (a) => a
 ) {
-  //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
   let headHit = false;
   while (current && (!headHit || current !== head)) {
@@ -327,7 +325,6 @@ function removeValue(
   value: any,
   searchFunction: (a: any) => any = (a) => a
 ) {
-  //TODO: add a compare function for dynamic search
   let dummy = { value: 0, next: head };
   let current: NodeObject = dummy;
   while (current.next) {
@@ -404,7 +401,6 @@ function mergeSort(
   head: NodeObject | null,
   compare: (val1: any, val2: any) => boolean = (a, b) => a < b
 ): NodeObject | null {
-  //TODO: add a compare function for dynamic sorting
   // Base case: if the list is empty or has only one node,
   // it's already sorted
   if (!head || !head.next) return head;
@@ -483,7 +479,6 @@ function mergeTwoSorted(
   head2: NodeObject | null,
   compare: (a: any, b: any) => boolean = (a, b) => a < b
 ) {
-  // TODO: can make dynamic by having user pass in a compare function
   if (!head1 || detectCycle(head1)) return null;
   if (!head2 || detectCycle(head2)) return null;
   let dummy = new NodeObject(0);
