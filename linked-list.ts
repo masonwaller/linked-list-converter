@@ -379,23 +379,31 @@ function split(head: NodeObject): NodeObject {
 }
 
 // Function to merge two sorted singly linked lists
-function mergeLists(first: NodeObject | null, second: NodeObject | null) {
+function mergeLists(
+  first: NodeObject | null,
+  second: NodeObject | null,
+  compare: (val1: any, val2: any) => boolean
+) {
   // If either list is empty, return the other list
   if (!first) return second;
   if (!second) return first;
 
   // Pick the smaller value between first and second nodes
-  if (first.value < second.value) {
-    first.next = mergeLists(first.next, second);
+  if (compare(first.value, second.value)) {
+    //first.value < second.value
+    first.next = mergeLists(first.next, second, compare);
     return first;
   } else {
-    second.next = mergeLists(first, second.next);
+    second.next = mergeLists(first, second.next, compare);
     return second;
   }
 }
 
 // Function to perform merge sort on a singly linked list
-function mergeSort(head: NodeObject | null): NodeObject | null {
+function mergeSort(
+  head: NodeObject | null,
+  compare: (val1: any, val2: any) => boolean = (a, b) => a < b
+): NodeObject | null {
   //TODO: add a compare function for dynamic sorting
   // Base case: if the list is empty or has only one node,
   // it's already sorted
@@ -405,11 +413,11 @@ function mergeSort(head: NodeObject | null): NodeObject | null {
   let second: NodeObject | null = split(head);
 
   // Recursively sort each half
-  head = mergeSort(head);
-  second = mergeSort(second);
+  head = mergeSort(head, compare);
+  second = mergeSort(second, compare);
 
   // Merge the two sorted halves
-  return mergeLists(head, second);
+  return mergeLists(head, second, compare);
 }
 
 function combine(head1: NodeObject, head2: NodeObject) {
