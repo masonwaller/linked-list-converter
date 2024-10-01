@@ -92,7 +92,7 @@ function clone(head: NodeObject) {
 function search(
   head: NodeObject,
   value: any,
-  searchFunction: (value: any) => boolean = (a) => a
+  searchFunction: (value: any) => any = (a) => a
 ) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
@@ -112,7 +112,7 @@ function search(
 function find(
   head: NodeObject,
   value: any,
-  searchFunction: (value: any) => boolean = (a) => a
+  searchFunction: (value: any) => any = (a) => a
 ) {
   //TODO: add a compare function for dynamic search
   let current: NodeObject | null = head;
@@ -325,7 +325,7 @@ function removeAfterIndex(head: NodeObject, index: number) {
 function removeValue(
   head: NodeObject,
   value: any,
-  searchFunction: (a: any) => boolean = (a) => a
+  searchFunction: (a: any) => any = (a) => a
 ) {
   //TODO: add a compare function for dynamic search
   let dummy = { value: 0, next: head };
