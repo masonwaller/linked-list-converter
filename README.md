@@ -511,9 +511,9 @@ Output: {
 }
 ```
 
-### mergeSort(head: NodeObject): NodeObject
+### mergeSort(head: NodeObject | null, compare?: (val1, val2) => boolean): NodeObject | null
 
-Provide a noncircular linked list and it'll return a new sorted list. Defaults to ascending order.
+Provide a noncircular linked list and it'll return a new sorted list. Defaults to ascending order. You can also provide a compare function that returns a boolean if the data to sort is nested in an object or needs to be computed, defaults to (val1, val2) => val1 < val2.
 
 ```
 const list = {
