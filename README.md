@@ -17,6 +17,8 @@ class NodeObject {
 
 Any other syntax for a linked list will not work with this package.
 
+Any additions needed or suggestions can be left at the repository here: [GitHub](https://github.com/masonwaller/linked-list-converter)
+
 ## How to use
 
 First start by installing it using the command listed. After you can import it where it is needed by doing:
