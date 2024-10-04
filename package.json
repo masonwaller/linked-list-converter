@@ -1,6 +1,6 @@
 {
   "name": "linked-list-operations",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic operations on a linked list along with conversions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
