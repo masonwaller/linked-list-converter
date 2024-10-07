@@ -14,7 +14,10 @@
   },
   "keywords": [
     "Linked",
-    "List"
+    "List",
+    "Operations",
+    "Converter",
+    "TypeScript"
   ],
   "author": "Mason Waller",
   "license": "ISC",
