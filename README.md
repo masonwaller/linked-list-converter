@@ -128,8 +128,7 @@ LinkedList.clone({
     }
 })
 
-Output:
-{
+Output: {
     value: 1,
     next: {
         value: 2,
